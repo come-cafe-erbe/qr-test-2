@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>カメラテスト</title>
+</head>
+<body>
+  <div id="qr-reader" style="width: 300px; height: 300px;"></div>
+
+  <script src="https://unpkg.com/html5-qrcode@2.3.7/html5-qrcode.min.js"></script>
+  <script>
+    function onScanSuccess(decodedText, decodedResult) {
+      console.log(`スキャン成功: ${decodedText}`);
+    }
+
+    function onScanError(errorMessage) {
+      console.log(`エラー: ${errorMessage}`);
+    }
+
+    const html5QrCode = new Html5Qrcode("qr-reader");
+    html5QrCode.start(
+      { facingMode: "environment" },
+      {
+        fps: 10,
+        qrbox: 250
+      },
+      onScanSuccess,
+      onScanError
+    ).catch(err => console.error("起動エラー:", err));
+  </script>
+</body>
+</html>
